@@ -230,7 +230,7 @@ export function stepCollidesWithWall(from, to, tokenData, adjustPos = false) {
 		adjustedStart = stepStart;
 	}
 	adjustedStart.t = adjustedStart.b = tokenData.elevation;
-	const source = new VisionSource({});
+	const source = new CONFIG.Canvas.visionSourceClass({});
 	return CONFIG.Canvas.polygonBackends.move.testCollision(adjustedStart, stepEnd, {
 		mode: "any",
 		type: "move",
