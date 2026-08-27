@@ -57,21 +57,21 @@ class Cache {
 export class GriddedCache extends Cache {
 	reset() {
 		super.reset();
-		if (canvas.grid.isHex && canvas.grid.grid.columnar) {
-			this.gridWidth = Math.ceil(canvas.dimensions.width / ((3 / 4) * canvas.grid.w));
+		if (canvas.grid.isHexagonal && canvas.grid.columns) {
+			this.gridWidth = Math.ceil(canvas.dimensions.width / ((3 / 4) * canvas.grid.sizeX));
 		} else {
-			this.gridWidth = Math.ceil(canvas.dimensions.width / canvas.grid.w);
+			this.gridWidth = Math.ceil(canvas.dimensions.width / canvas.grid.sizeX);
 		}
-		if (canvas.grid.isHex && !canvas.grid.grid.columnar) {
-			this.gridHeight = Math.ceil(canvas.dimensions.height / ((3 / 4) * canvas.grid.h));
+		if (canvas.grid.isHexagonal && !canvas.grid.columns) {
+			this.gridHeight = Math.ceil(canvas.dimensions.height / ((3 / 4) * canvas.grid.sizeY));
 		} else {
-			this.gridHeight = Math.ceil(canvas.dimensions.height / canvas.grid.h);
+			this.gridHeight = Math.ceil(canvas.dimensions.height / canvas.grid.sizeY);
 		}
 	}
 
 	static getSnapPointIndexForTokenData(tokenData) {
 		if (canvas.grid.type === CONST.GRID_TYPES.GRIDLESS) return 0;
-		if (canvas.grid.isHex) {
+		if (canvas.grid.isHexagonal) {
 			if (tokenData.hexSizeSupport?.altSnappingFlag) {
 				return tokenData.hexSizeSupport.borderSize % 2;
 			} else {
@@ -95,9 +95,20 @@ export class GriddedCache extends Cache {
 		let node = graph[pos.y][pos.x];
 		if (!node) {
 			const neighbors = [];
-			for (const neighborPos of canvas.grid.grid.getNeighbors(pos.y, pos.x).map(([y, x]) => {
-				return {x, y};
-			})) {
+			const neighborPositions =
+				canvas.grid.type === CONST.GRID_TYPES.SQUARE
+					? [
+						{x: pos.x - 1, y: pos.y - 1},
+						{x: pos.x, y: pos.y - 1},
+						{x: pos.x + 1, y: pos.y - 1},
+						{x: pos.x - 1, y: pos.y},
+						{x: pos.x + 1, y: pos.y},
+						{x: pos.x - 1, y: pos.y + 1},
+						{x: pos.x, y: pos.y + 1},
+						{x: pos.x + 1, y: pos.y + 1},
+					]
+					: canvas.grid.getAdjacentOffsets({i: pos.x, j: pos.y}).map(({i, j}) => ({x: i, y: j}));
+			for (const neighborPos of neighborPositions) {
 				if (
 					neighborPos.x < 0 ||
 					neighborPos.y < 0 ||

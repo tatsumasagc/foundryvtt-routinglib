@@ -29,14 +29,15 @@ export class GriddedPathfinder {
 	}
 
 	reset() {
-		this.use5105 = game.system.id === "pf2e" || canvas.grid.diagonalRule === "5105";
+		this.use5105 =
+			game.system.id === "pf2e" || canvas.grid.diagonals === CONST.GRID_DIAGONALS.ALTERNATING_1;
 		this.nextNodes = new PriorityQueueSet(
 			(node1, node2) => node1.node === node2.node,
 			node => node.estimated,
 		);
 		this.previousNodes = new Set();
-		this.gridWidth = Math.ceil(canvas.dimensions.width / canvas.grid.w);
-		this.gridHeight = Math.ceil(canvas.dimensions.height / canvas.grid.h);
+		this.gridWidth = Math.ceil(canvas.dimensions.width / canvas.grid.sizeX);
+		this.gridHeight = Math.ceil(canvas.dimensions.height / canvas.grid.sizeY);
 		this.startNode = cache.getInitializedNode(
 			this.startPos,
 			this.sizeIndex,

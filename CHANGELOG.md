@@ -1,3 +1,9 @@
+## 1.1.1
+### Compatibility
+- Removed the unsupported `allowBugReporter` manifest key that caused Foundry VTT to report an unknown-key warning.
+- Migrated RoutingLib’s grid coordinate, sizing, orientation, neighbor, and diagonal-rule calls to the public Grid API introduced in Foundry VTT v12.
+- Verified against Foundry VTT v14.367 API documentation.
+
 ## 1.1.0
 ### Performance
 - Increased the speed of the gridless pathfinder (thanks to MavethGH for suggesting this improved algorithm!)
