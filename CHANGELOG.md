@@ -1,8 +1,9 @@
-## 1.1.2
+## 1.1.3
 ### Compatibility
 - Removed the unsupported `allowBugReporter` manifest key that caused Foundry VTT to report an unknown-key warning.
 - Migrated RoutingLib’s grid coordinate, sizing, orientation, neighbor, and diagonal-rule calls to the public Grid API introduced in Foundry VTT v12.
 - Replaced the legacy global `VisionSource` constructor with the documented `CONFIG.Canvas.visionSourceClass` used by V14’s collision backend.
+- Published the update manifest as a release asset so Foundry resolves the current metadata without relying on a cached branch URL.
 - Verified against Foundry VTT v14.367 API documentation.
 
 ## 1.1.0

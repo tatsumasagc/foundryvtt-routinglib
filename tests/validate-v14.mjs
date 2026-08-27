@@ -29,12 +29,12 @@ for (const key of Object.keys(manifest)) {
 	check(supportedManifestKeys.has(key), `Unexpected manifest key: ${key}`);
 }
 check(manifest.id === "routinglib", "Manifest id must remain routinglib.");
-check(manifest.version === "1.1.2", "Manifest version must be 1.1.2.");
+check(manifest.version === "1.1.3", "Manifest version must be 1.1.3.");
 check(manifest.compatibility?.minimum === "12", "Minimum core version must be 12.");
 check(manifest.compatibility?.verified === "14.367", "Verified core version must be 14.367.");
 check(!("allowBugReporter" in manifest), "allowBugReporter must not be present.");
-check(manifest.manifest === "https://raw.githubusercontent.com/tatsumasagc/foundryvtt-routinglib/develop/module.json", "Manifest URL must point to this fork.");
-check(manifest.download === "https://github.com/tatsumasagc/foundryvtt-routinglib/releases/download/v1.1.2/routinglib-1.1.2.zip","Download URL must point to the v1.1.2 release.");
+check(manifest.manifest === "https://github.com/tatsumasagc/foundryvtt-routinglib/releases/latest/download/module.json", "Manifest URL must point to this fork’s latest release asset.");
+check(manifest.download === "https://github.com/tatsumasagc/foundryvtt-routinglib/releases/download/v1.1.3/routinglib-1.1.3.zip","Download URL must point to the v1.1.3 release.");
 
 const sourcePaths = [
 	"js/cache.js",
